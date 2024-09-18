@@ -1,5 +1,6 @@
 package com.booknet.bookcomm.api.controller.order;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,5 +15,10 @@ public class OrderController {
 
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
+    }
+
+    @GetMapping
+    public List<WebOrder> getOrders(@AuthenticationPrincipal LocalUser user) {
+        return orderService.getOrder(user);
     }
 }
