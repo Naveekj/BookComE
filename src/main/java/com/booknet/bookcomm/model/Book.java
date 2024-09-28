@@ -1,28 +1,55 @@
 package com.booknet.bookcomm.model;
 
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.*;
 
-@Document(collection = "books")
+@Entity
+@Table(name = "book")
 public class Book {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
 
+    @Column(name = "title", nullable = false)
     private String title;
-    private String authors;
+
+    @Column(name = "author")
+    private String author;
+
+    @Column(name = "description", length = 10000)
     private String description;
 
-    public String getTitle() {
-        return title;
+    @Column(name = "isbn", nullable = false, unique = true)
+    private String isbn;
+
+    @Column(name = "condition")
+    private String condition;
+
+    @Column(name = "minbid")
+    private String minbid;
+
+    public String getMinbid() {
+        return minbid;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setMinbid(String minbid) {
+        this.minbid = minbid;
     }
 
-    public String getAuthors() {
-        return authors;
+    public String getCondition() {
+        return condition;
     }
 
-    public void setAuthors(String authors) {
-        this.authors = authors;
+    public void setCondition(String condition) {
+        this.condition = condition;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public String getDescription() {
@@ -33,15 +60,28 @@ public class Book {
         this.description = description;
     }
 
-    public Book() {
+    public String getAuthor() {
+        return author;
     }
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "title='" + title + '\'' +
-                ", authors='" + authors + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+    public void setAuthor(String author) {
+        this.author = author;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 }
